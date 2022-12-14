@@ -104,7 +104,14 @@ export default function AraArbCalculatioInputn() {
         <Heading as="h2" size="lg" marginBottom={4}>
           IDX Information
         </Heading>
-        <Image src="/imgs/ara-arb.jpg" alt="ARA ARB" maxW="560px" />
+        <Heading as="h3" size="md" marginBottom={4}>
+          Auto Rejection Policy
+        </Heading>
+        <Image src="/imgs/auto-rejection.jpg" alt="ARA ARB" maxW="720px" />
+        <Heading as="h3" size="md" marginBottom={4} marginTop={6}>
+          Trading Unit Policy
+        </Heading>
+        <Image src="/imgs/trading-unit.png" alt="Trading Unit" maxW="800px" />
       </Box>
     </Container>
   );
