@@ -3,9 +3,8 @@ import {
   Box,
   Heading,
   Image,
-  Input,
-  InputLeftAddon,
-  InputGroup,
+  NumberInput,
+  NumberInputField,
   Card,
   CardHeader,
   CardBody,
@@ -64,18 +63,16 @@ export default function AraArbCalculatioInputn() {
           ARA & ARB Calculation
         </Heading>
         <Box marginBottom={6}>
-          <InputGroup>
-            <InputLeftAddon children="Rp" />
-            <Input
+          <NumberInput defaultValue={0} min={0}>
+            <NumberInputField
               placeholder="Put stock price here"
-              type="number"
               onChange={handleChangePrice}
             />
-          </InputGroup>
+          </NumberInput>
         </Box>
         <Box display="flex">
-          <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-            <Card w="100%">
+          <Grid templateColumns="repeat(2, 1fr)" gap={6} w="100%">
+            <Card>
               <CardHeader>
                 <Heading size="md">Auto Rejection Bawah (ARB)</Heading>
               </CardHeader>
@@ -86,7 +83,7 @@ export default function AraArbCalculatioInputn() {
                 </Text>
               </CardBody>
             </Card>
-            <Card w="100%">
+            <Card>
               <CardHeader>
                 <Heading size="md">Auto Rejection Atas (ARA)</Heading>
               </CardHeader>
