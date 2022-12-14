@@ -63,7 +63,7 @@ export default function AraArbCalculatioInputn() {
           ARA & ARB Calculation
         </Heading>
         <Box marginBottom={6}>
-          <NumberInput defaultValue={0} min={0}>
+          <NumberInput defaultValue={100} min={50}>
             <NumberInputField
               placeholder="Put stock price here"
               onChange={handleChangePrice}
