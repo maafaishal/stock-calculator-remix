@@ -1,3 +1,14 @@
+import { Container } from "@chakra-ui/react";
+
 export default function PercentageCalculation() {
-  return <div>Percen</div>;
+  return (
+    <Container
+      maxW="container.lg"
+      display="flex"
+      alignItems="center"
+      textAlign="center"
+    >
+      Ara
+    </Container>
+  );
 }
