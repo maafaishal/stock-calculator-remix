@@ -11,6 +11,8 @@ import {
 import { withEmotionCache } from "@emotion/react";
 import { ChakraProvider } from "@chakra-ui/react";
 
+import Layout from "./components/Layout";
+
 import { ServerStyleContext, ClientStyleContext } from "./context";
 
 export const meta: MetaFunction = () => ({
@@ -82,7 +84,9 @@ export default function App() {
   return (
     <Document>
       <ChakraProvider>
-        <Outlet />
+        <Layout>
+          <Outlet />
+        </Layout>
       </ChakraProvider>
     </Document>
   );

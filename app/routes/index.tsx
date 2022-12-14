@@ -1,38 +1,62 @@
-import { Heading } from "@chakra-ui/react";
+import {
+  Grid,
+  Container,
+  Box,
+  Card,
+  CardBody,
+  Text,
+  Heading,
+} from "@chakra-ui/react";
+import { Link } from "@remix-run/react";
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <Heading>I'm a Heading</Heading>
-      <Heading as="h1" size="4xl" noOfLines={1}>
-        (4xl) In love with React & Next
-      </Heading>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
+    <Container
+      maxW="container.lg"
+      display="flex"
+      alignItems="center"
+      textAlign="center"
+    >
+      <Box w="100%">
+        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+          <Card>
+            <Link to="/average-price-calculation">
+              <CardBody>
+                <Heading as="h2" size="xl">
+                  Average Price
+                </Heading>
+                <Text fontSize="lg" fontWeight="semibold" marginTop="2">
+                  Calculation
+                </Text>
+              </CardBody>
+            </Link>
+          </Card>
+          <Card>
+            <Link to="/percentage-calculation">
+              <CardBody>
+                <Heading as="h2" size="xl">
+                  Percentage
+                </Heading>
+                <Text fontSize="lg" fontWeight="semibold" marginTop="2">
+                  Calculation
+                </Text>
+              </CardBody>
+            </Link>
+          </Card>
+          <Card>
+            <Link to="/ara-arb-calculation">
+              <CardBody>
+                <Heading as="h2" size="xl">
+                  ARA / ARB
+                </Heading>
+                <Text fontSize="lg" fontWeight="semibold" marginTop="2">
+                  Calculation
+                </Text>
+              </CardBody>
+            </Link>
+          </Card>
+        </Grid>
+      </Box>
+    </Container>
   );
 }
