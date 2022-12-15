@@ -15,6 +15,22 @@ import { useState } from "react";
 
 import printNumberFormat from "~/helpers/printNumberFormat";
 
+const getStockMultiple = (price: number, isARA = false) => {
+  const roundingFormula = isARA ? Math.floor : Math.ceil;
+
+  if (price >= 5000) {
+    return roundingFormula(price / 25) * 25;
+  } else if (price >= 2000) {
+    return roundingFormula(price / 10) * 10;
+  } else if (price >= 500) {
+    return roundingFormula(price / 5) * 5;
+  } else if (price >= 200) {
+    return roundingFormula(price / 2) * 2;
+  }
+
+  return price;
+};
+
 export default function AraArbCalculatioInputn() {
   const [araData, setARAData] = useState({ price: 0, percentage: 0 });
   const [arbData, setARBData] = useState({ price: 0, percentage: 0 });
@@ -29,22 +45,24 @@ export default function AraArbCalculatioInputn() {
       araPercentage = 25;
     }
 
-    const araPrice = Math.floor(price + (price * araPercentage) / 100);
-    const percentage = ((araPrice - price) / price) * 100;
+    const araPrice = price + (price * araPercentage) / 100;
+    const araPriceMultiple = Math.floor(getStockMultiple(araPrice, true));
+    const percentage = ((araPriceMultiple - price) / price) * 100;
 
     setARAData({
-      price: araPrice,
+      price: araPriceMultiple,
       percentage,
     });
   };
 
   const updateARB = (price: number) => {
-    const tempPrice = Math.ceil(price - (price * 7) / 100);
+    const tempPrice = price - (price * 7) / 100;
     const arbPrice = tempPrice >= 50 ? tempPrice : 50;
-    const percentage = ((arbPrice - price) / price) * 100;
+    const arbPriceMultiple = Math.ceil(getStockMultiple(arbPrice));
+    const percentage = ((arbPriceMultiple - price) / price) * 100;
 
     setARBData({
-      price: arbPrice,
+      price: arbPriceMultiple,
       percentage,
     });
   };
