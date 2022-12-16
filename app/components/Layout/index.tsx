@@ -19,7 +19,7 @@ export default function Layout({ children }: Props) {
         justifyContent="center"
       >
         <Heading as="h2" size="2xl">
-          Stock Calculator
+          IDX Stock Tools
         </Heading>
       </Box>
       <Box w="100%" minH="calc(100vh - (112px + 56px))" display="flex">
