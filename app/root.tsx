@@ -14,10 +14,11 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Layout from "./components/Layout";
 
 import { ServerStyleContext, ClientStyleContext } from "./context";
+import { META_TITLE } from "./constants/meta";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "IDX Stock Tools",
+  title: META_TITLE,
   viewport: "width=device-width,initial-scale=1",
 });
 

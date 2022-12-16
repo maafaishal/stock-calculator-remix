@@ -13,7 +13,13 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
+import type { MetaFunction } from "@remix-run/node";
+
 import printNumberFormat from "~/helpers/printNumberFormat";
+import getMeta from "~/helpers/getMeta";
+
+export const meta: MetaFunction = () =>
+  getMeta({ title: "ARB & ARA Calculation" });
 
 const getStockMultiple = (price: number, isARA = false) => {
   const roundingFormula = isARA ? Math.floor : Math.ceil;
