@@ -11,6 +11,12 @@ import {
   Text,
   Grid,
 } from "@chakra-ui/react";
+import type { MetaFunction } from "@remix-run/node";
+
+import getMeta from "~/helpers/getMeta";
+
+export const meta: MetaFunction = () =>
+  getMeta({ title: "Percentage Calculation" });
 
 const NUMBER = 10000;
 

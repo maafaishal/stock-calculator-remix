@@ -12,6 +12,12 @@ import {
   Text,
   Grid,
 } from "@chakra-ui/react";
+import type { MetaFunction } from "@remix-run/node";
+
+import getMeta from "~/helpers/getMeta";
+
+export const meta: MetaFunction = () =>
+  getMeta({ title: "Average Price Calculation" });
 
 export default function AveragePriceCalculation() {
   return (
