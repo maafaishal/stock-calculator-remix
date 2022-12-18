@@ -92,7 +92,7 @@ export default function AraArbCalculation() {
             </NumberInput>
           </Box>
           <button type="submit" hidden>
-            Create Todo
+            Submit
           </button>
           <Box display="flex">
             <Grid templateColumns="repeat(2, 1fr)" gap={6} w="100%">

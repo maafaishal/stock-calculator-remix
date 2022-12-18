@@ -102,7 +102,7 @@ export default function AverageCalculation() {
             </Grid>
           </Box>
           <button type="submit" hidden>
-            Create Todo
+            Submit
           </button>
         </Box>
       </Form>

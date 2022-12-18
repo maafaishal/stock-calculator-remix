@@ -46,7 +46,7 @@ export default function PercentageCalculation() {
                 <FormLabel>Average Price</FormLabel>
                 <NumberInput>
                   <NumberInputField
-                    placeholder="Put stock price here"
+                    placeholder="Put average price here"
                     name="averagePrice"
                   />
                 </NumberInput>
@@ -55,7 +55,7 @@ export default function PercentageCalculation() {
                 <FormLabel>Current/Target Price</FormLabel>
                 <NumberInput>
                   <NumberInputField
-                    placeholder="Put stock price here"
+                    placeholder="Put current/target price here"
                     name="targetPrice"
                   />
                 </NumberInput>
@@ -64,7 +64,7 @@ export default function PercentageCalculation() {
                 <FormLabel>Amount</FormLabel>
                 <NumberInput min={50}>
                   <NumberInputField
-                    placeholder="Put stock price here"
+                    placeholder="Put amount here"
                     name="amount"
                   />
                 </NumberInput>
@@ -72,7 +72,7 @@ export default function PercentageCalculation() {
             </Grid>
           </Box>
           <button type="submit" hidden>
-            Create Todo
+            Submit
           </button>
         </Box>
       </Form>
