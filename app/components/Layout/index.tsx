@@ -1,4 +1,4 @@
-import { Box, Text, Heading } from "@chakra-ui/react";
+import { Box, Text, Heading, Link as LinkComp } from "@chakra-ui/react";
 import { Link } from "@remix-run/react";
 
 interface Props {
@@ -36,8 +36,12 @@ export default function Layout({ children }: Props) {
         color="white"
         textAlign="center"
       >
-        <Text>
-          Made by Muhammad A Faishal with{" "}
+        <Text fontWeight="medium">
+          Made by{" "}
+          <LinkComp href="https://github.com/maafaishal" isExternal>
+            Muhammad A Faishal
+          </LinkComp>{" "}
+          with{" "}
           <Text as="span" color="red.500">
             ♥
           </Text>
