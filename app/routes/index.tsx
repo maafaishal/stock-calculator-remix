@@ -1,5 +1,5 @@
 import {
-  Grid,
+  SimpleGrid,
   Container,
   Box,
   Card,
@@ -18,44 +18,44 @@ export default function Index() {
       textAlign="center"
     >
       <Box w="100%">
-        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+        <SimpleGrid columns={[1, 1, 3]} spacing={6}>
           <Card>
-            <Link to="/average-price-calculation">
-              <CardBody>
+            <CardBody display="flex" alignItems="center">
+              <Link to="/average-price-calculation">
                 <Heading as="h2" size="xl">
                   Average Price
                 </Heading>
                 <Text fontSize="lg" fontWeight="semibold" marginTop="2">
                   Calculation
                 </Text>
-              </CardBody>
-            </Link>
+              </Link>
+            </CardBody>
           </Card>
           <Card>
-            <Link to="/percentage-calculation">
-              <CardBody>
+            <CardBody display="flex" alignItems="center">
+              <Link to="/percentage-calculation">
                 <Heading as="h2" size="xl">
                   Percentage
                 </Heading>
                 <Text fontSize="lg" fontWeight="semibold" marginTop="2">
                   Calculation
                 </Text>
-              </CardBody>
-            </Link>
+              </Link>
+            </CardBody>
           </Card>
           <Card>
-            <Link to="/ara-arb-calculation">
-              <CardBody>
+            <CardBody display="flex" alignItems="center">
+              <Link to="/ara-arb-calculation">
                 <Heading as="h2" size="xl">
                   ARA / ARB
                 </Heading>
                 <Text fontSize="lg" fontWeight="semibold" marginTop="2">
                   Calculation
                 </Text>
-              </CardBody>
-            </Link>
+              </Link>
+            </CardBody>
           </Card>
-        </Grid>
+        </SimpleGrid>
       </Box>
     </Container>
   );
