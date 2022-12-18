@@ -20,6 +20,7 @@ import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 
 import getMeta from "~/helpers/getMeta";
+import printNumberFormat from "~/helpers/printNumberFormat";
 
 const BUY_TYPE = "1";
 const SELL_TYPE = "2";
@@ -44,10 +45,18 @@ export default function AverageCalculation() {
               <FormLabel>Transaction Type</FormLabel>
               <RadioGroup defaultValue={BUY_TYPE}>
                 <Stack spacing={5} direction="row">
-                  <Radio colorScheme="blue" value={BUY_TYPE}>
+                  <Radio
+                    colorScheme="blue"
+                    name="transactionType"
+                    value={BUY_TYPE}
+                  >
                     Buy
                   </Radio>
-                  <Radio colorScheme="red" value={SELL_TYPE}>
+                  <Radio
+                    colorScheme="red"
+                    name="transactionType"
+                    value={SELL_TYPE}
+                  >
                     Sell
                   </Radio>
                 </Stack>
@@ -142,6 +151,7 @@ export default function AverageCalculation() {
 
 export const action = async ({ request }: ActionArgs) => {
   const body = await request.formData();
+  const transactionType = body.get("transactionType");
   const currentLot = Number(body.get("currentLot"));
   const currentPrice = Number(body.get("currentPrice"));
   const targetLot = Number(body.get("targetLot"));
@@ -156,15 +166,22 @@ export const action = async ({ request }: ActionArgs) => {
     throw new Error(`Form not submitted correctly.`);
   }
 
+  const isBuy = transactionType === BUY_TYPE;
+
   const currentAmount = currentLot * currentPrice;
   const targetAmount = targetLot * targetPrice;
 
-  const averagePrice =
-    (currentAmount + targetAmount) / (currentLot + targetLot);
+  const amountTotal = isBuy
+    ? currentAmount + targetAmount
+    : currentAmount - targetAmount;
+  const lotTotal = isBuy ? currentLot + targetLot : currentLot - targetLot;
+  const averagePrice = printNumberFormat(amountTotal / lotTotal, {
+    withCurrency: true,
+  });
 
   return json({
     averagePrice,
-    stockLot: currentLot + targetLot,
-    amount: currentAmount + targetAmount,
+    stockLot: printNumberFormat(lotTotal),
+    amount: printNumberFormat(amountTotal, { withCurrency: true }),
   });
 };
