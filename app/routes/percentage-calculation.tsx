@@ -2,60 +2,103 @@ import {
   Container,
   Box,
   Heading,
-  Input,
-  InputLeftAddon,
-  InputGroup,
+  NumberInput,
+  NumberInputField,
+  Grid,
+  FormControl,
+  FormLabel,
   Card,
   CardHeader,
   CardBody,
   Text,
-  Grid,
 } from "@chakra-ui/react";
-import type { MetaFunction } from "@remix-run/node";
+import type { ActionArgs, MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { Form, useActionData } from "@remix-run/react";
 
 import getMeta from "~/helpers/getMeta";
+import printNumberFormat from "~/helpers/printNumberFormat";
 
 export const meta: MetaFunction = () =>
   getMeta({ title: "Percentage Calculation" });
 
-const NUMBER = 10000;
-
 export default function PercentageCalculation() {
+  const actionData = useActionData<typeof action>();
+
+  const {
+    percentage = 0,
+    amountTotal = 0,
+    amountDeviation = 0,
+  } = actionData || {};
+
+  const textColor = percentage < 0 ? "red.500" : "green.400";
+
   return (
     <Container maxW="container.lg" pt={8} pb={16}>
-      <Box marginBottom={12}>
-        <Heading as="h2" size="xl" marginBottom={4}>
-          Percentage Calculation
-        </Heading>
-        <Box marginBottom={6}>
-          <InputGroup>
-            <InputLeftAddon children="Rp" />
-            <Input placeholder="Put previous price here" type="number" />
-          </InputGroup>
-          <InputGroup>
-            <InputLeftAddon children="Rp" />
-            <Input placeholder="Put current price here" type="number" />
-          </InputGroup>
+      <Form method="post">
+        <Box marginBottom={12}>
+          <Heading as="h2" size="xl" marginBottom={4}>
+            Percentage Calculation
+          </Heading>
+          <Box marginBottom={6}>
+            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+              <FormControl>
+                <FormLabel>Average Price</FormLabel>
+                <NumberInput>
+                  <NumberInputField
+                    placeholder="Put stock price here"
+                    name="averagePrice"
+                  />
+                </NumberInput>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Current/Target Price</FormLabel>
+                <NumberInput>
+                  <NumberInputField
+                    placeholder="Put stock price here"
+                    name="targetPrice"
+                  />
+                </NumberInput>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Amount</FormLabel>
+                <NumberInput min={50}>
+                  <NumberInputField
+                    placeholder="Put stock price here"
+                    name="amount"
+                  />
+                </NumberInput>
+              </FormControl>
+            </Grid>
+          </Box>
+          <button type="submit" hidden>
+            Create Todo
+          </button>
         </Box>
+      </Form>
+      <Box>
+        <Heading as="h3" size="lg" marginBottom={4}>
+          Result
+        </Heading>
         <Box display="flex">
-          <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+          <Grid templateColumns="repeat(2, 1fr)" gap={6} w="100%">
             <Card>
               <CardHeader>
-                <Heading size="md">Auto Rejection Bawah (ARB)</Heading>
+                <Heading size="md">Amount Total</Heading>
               </CardHeader>
               <CardBody>
-                <Text fontSize="6xl" fontWeight="bold" color="red.500">
-                  10000 (7%)
+                <Text fontSize="4xl" fontWeight="bold" color={textColor}>
+                  {amountTotal}
                 </Text>
               </CardBody>
             </Card>
             <Card>
               <CardHeader>
-                <Heading size="md">Auto Rejection Atas (ARA)</Heading>
+                <Heading size="md">Percentage</Heading>
               </CardHeader>
               <CardBody>
-                <Text fontSize="6xl" fontWeight="bold" color="green.400">
-                  10000 (35%)
+                <Text fontSize="4xl" fontWeight="bold" color={textColor}>
+                  {printNumberFormat(percentage)}% ({amountDeviation})
                 </Text>
               </CardBody>
             </Card>
@@ -65,3 +108,28 @@ export default function PercentageCalculation() {
     </Container>
   );
 }
+
+export const action = async ({ request }: ActionArgs) => {
+  const body = await request.formData();
+  const averagePrice = Number(body.get("averagePrice"));
+  const targetPrice = Number(body.get("targetPrice"));
+  const amount = Number(body.get("amount"));
+
+  if (
+    typeof averagePrice !== "number" ||
+    typeof targetPrice !== "number" ||
+    typeof amount !== "number"
+  ) {
+    throw new Error(`Form not submitted correctly.`);
+  }
+
+  const percentage = ((targetPrice - averagePrice) / averagePrice) * 100;
+  const amountTotal = amount + (amount * percentage) / 100;
+  const amountDeviation = amountTotal - amount;
+
+  return json({
+    percentage: percentage,
+    amountTotal: printNumberFormat(amountTotal, { withCurrency: true }),
+    amountDeviation: printNumberFormat(amountDeviation, { withCurrency: true }),
+  });
+};

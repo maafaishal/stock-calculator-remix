@@ -69,7 +69,7 @@ const updateARB = (price: number) => {
   };
 };
 
-export default function AraArbCalculatioInputn() {
+export default function AraArbCalculation() {
   const actionData = useActionData<typeof action>();
 
   const { arbData, araData } = actionData || {};
