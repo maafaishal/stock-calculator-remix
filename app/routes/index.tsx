@@ -20,7 +20,11 @@ export default function Index() {
       <Box w="100%">
         <SimpleGrid columns={[1, 1, 3]} spacing={6}>
           <Card>
-            <CardBody display="flex" alignItems="center">
+            <CardBody
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
               <Link to="/average-price-calculation">
                 <Heading as="h2" size="xl">
                   Average Price
@@ -32,7 +36,11 @@ export default function Index() {
             </CardBody>
           </Card>
           <Card>
-            <CardBody display="flex" alignItems="center">
+            <CardBody
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
               <Link to="/percentage-calculation">
                 <Heading as="h2" size="xl">
                   Percentage
@@ -44,7 +52,11 @@ export default function Index() {
             </CardBody>
           </Card>
           <Card>
-            <CardBody display="flex" alignItems="center">
+            <CardBody
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
               <Link to="/ara-arb-calculation">
                 <Heading as="h2" size="xl">
                   ARA / ARB

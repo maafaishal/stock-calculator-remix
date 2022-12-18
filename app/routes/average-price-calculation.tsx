@@ -182,6 +182,6 @@ export const action = async ({ request }: ActionArgs) => {
   return json({
     averagePrice,
     stockLot: printNumberFormat(lotTotal),
-    amount: printNumberFormat(amountTotal, { withCurrency: true }),
+    amount: printNumberFormat(amountTotal * 100, { withCurrency: true }),
   });
 };
