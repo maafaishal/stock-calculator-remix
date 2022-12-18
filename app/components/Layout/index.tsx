@@ -1,4 +1,5 @@
 import { Box, Text, Heading } from "@chakra-ui/react";
+import { Link } from "@remix-run/react";
 
 interface Props {
   children: React.ReactNode;
@@ -18,9 +19,11 @@ export default function Layout({ children }: Props) {
         alignItems="flex-end"
         justifyContent="center"
       >
-        <Heading as="h2" size="2xl">
-          IDX Stock Tools
-        </Heading>
+        <Link to="/">
+          <Heading as="h2" size="2xl">
+            IDX Stock Tools
+          </Heading>
+        </Link>
       </Box>
       <Box w="100%" minH="calc(100vh - (112px + 56px))" display="flex">
         {children}
