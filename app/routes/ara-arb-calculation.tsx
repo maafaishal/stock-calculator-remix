@@ -129,11 +129,21 @@ export default function AraArbCalculatioInputn() {
         <Heading as="h3" size="md" marginBottom={4}>
           Auto Rejection Policy
         </Heading>
-        <Image src="/imgs/auto-rejection.jpg" alt="ARA ARB" maxW="720px" />
+        <Image
+          src="/imgs/auto-rejection.jpg"
+          alt="ARA ARB"
+          maxW="720px"
+          w="100%"
+        />
         <Heading as="h3" size="md" marginBottom={4} marginTop={6}>
           Trading Unit Policy
         </Heading>
-        <Image src="/imgs/trading-unit.png" alt="Trading Unit" maxW="800px" />
+        <Image
+          src="/imgs/trading-unit.png"
+          alt="Trading Unit"
+          maxW="800px"
+          w="100%"
+        />
       </Box>
     </Container>
   );
