@@ -6,8 +6,11 @@ import {
   CardBody,
   Text,
   Heading,
+  Icon,
 } from "@chakra-ui/react";
 import { Link } from "@remix-run/react";
+
+import { FaPercentage, FaChartBar, FaMoneyBillWave } from "react-icons/fa";
 
 export default function Index() {
   return (
@@ -26,6 +29,7 @@ export default function Index() {
               justifyContent="center"
             >
               <Link to="/average-price-calculation">
+                <Icon as={FaMoneyBillWave} fontSize="64" marginBottom="6" />
                 <Heading as="h2" size="xl">
                   Average Price
                 </Heading>
@@ -42,6 +46,7 @@ export default function Index() {
               justifyContent="center"
             >
               <Link to="/percentage-calculation">
+                <Icon as={FaPercentage} fontSize="64" marginBottom="6" />
                 <Heading as="h2" size="xl">
                   Percentage
                 </Heading>
@@ -58,6 +63,7 @@ export default function Index() {
               justifyContent="center"
             >
               <Link to="/ara-arb-calculation">
+                <Icon as={FaChartBar} fontSize="64" marginBottom="6" />
                 <Heading as="h2" size="xl">
                   ARA / ARB
                 </Heading>
