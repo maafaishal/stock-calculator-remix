@@ -2,7 +2,6 @@ import {
   Box,
   Text,
   Heading,
-  Link as LinkComp,
   Image,
   IconButton,
   Container,
@@ -64,24 +63,22 @@ export default function Layout({ children }: Props) {
       <Box w="100%" minH="calc(100vh - (112px + 56px))" display="flex">
         {children}
       </Box>
-      <Box
-        as="footer"
-        w="100%"
-        p={4}
-        bg="#30D5C8"
-        color="white"
-        textAlign="center"
-      >
-        <Text fontWeight="medium">
-          Made by{" "}
-          <LinkComp href="https://github.com/maafaishal" isExternal>
-            Muhammad A Faishal
-          </LinkComp>{" "}
-          with{" "}
-          <Text as="span" color="red.500">
-            ♥
+      <Box as="footer" w="100%" p={4} bg="#EFEFEF" color="black">
+        <Container
+          maxW="container.lg"
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          w="100%"
+        >
+          <Text fontWeight="medium">Ⓒ IDX Tools</Text>
+          <Text fontWeight="medium">
+            Made with{" "}
+            <Text as="span" color="red.500">
+              ♥
+            </Text>
           </Text>
-        </Text>
+        </Container>
       </Box>
     </div>
   );
