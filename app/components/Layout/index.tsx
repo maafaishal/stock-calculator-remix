@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "@remix-run/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { ImGithub } from "react-icons/im";
 
 interface Props {
   children: React.ReactNode;
@@ -51,13 +52,30 @@ export default function Layout({ children }: Props) {
               </Heading>
             </Box>
           </Link>
-          <IconButton
-            position="absolute"
-            right={0}
-            aria-label="Switch Color"
-            onClick={toggleColorMode}
-            icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-          />
+          <Box position="absolute" right={0}>
+            <a
+              href="https://github.com/maafaishal/stock-calculator-remix"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <IconButton
+                aria-label="Go to Github"
+                icon={<ImGithub fontSize="20px" />}
+                marginRight="6px"
+              />
+            </a>
+            <IconButton
+              aria-label="Switch Color"
+              onClick={toggleColorMode}
+              icon={
+                colorMode === "light" ? (
+                  <MoonIcon fontSize="20px" />
+                ) : (
+                  <SunIcon fontSize="20px" />
+                )
+              }
+            />
+          </Box>
         </Container>
       </Box>
       <Box w="100%" minH="calc(100vh - (112px + 56px))" display="flex">
