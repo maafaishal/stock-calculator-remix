@@ -80,7 +80,7 @@ export default function Layout({ children }: Props) {
           </Box>
         </Container>
       </Box>
-      <Box w="100%" minH="calc(100vh - (112px + 56px))" display="flex">
+      <Box w="100%" minH="calc(100vh - (112px + 88px))" display="flex">
         {children}
       </Box>
       <Box
@@ -88,6 +88,7 @@ export default function Layout({ children }: Props) {
         w="100%"
         p={4}
         bg={isLight ? "gray.100" : undefined}
+        marginTop="32px"
         borderTop="1px"
         borderTopColor={isLight ? "gray.100" : "gray.600"}
       >
