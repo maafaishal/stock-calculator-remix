@@ -41,7 +41,7 @@ const theme = extendTheme({
   },
   semanticTokens: {
     colors: {
-      "chakra-body-text": { _light: "gray.700" },
+      "chakra-body-text": { _light: "gray.600" },
     },
   },
 });
