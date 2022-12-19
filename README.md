@@ -1,34 +1,58 @@
-# Welcome to Remix!
+![idx-logo2](https://user-images.githubusercontent.com/20511839/208378154-c99d7d1b-5a4f-424a-b260-f5e69ff694e4.png)
 
-- [Remix Docs](https://remix.run/docs)
+---
 
-## Deployment
+**IDX Tools** is a project to provide tools of Indonesia Stock Exchange (Bursa Efek Indonesia) such as Average Price Calculation, Increase/Decrease Calculation, and ARA/ARB Calculation.
 
-After having run the `create-remix` command and selected "Vercel" as a deployment target, you only need to [import your Git repository](https://vercel.com/new) into Vercel, and it will be deployed.
+## URL
 
-If you'd like to avoid using a Git repository, you can also deploy the directory by running [Vercel CLI](https://vercel.com/cli):
+<https://idxtools.vercel.app/>
 
-```sh
-npm i -g vercel
-vercel
-```
+## Tech Stack
 
-It is generally recommended to use a Git repository, because future commits will then automatically be deployed by Vercel, through its [Git Integration](https://vercel.com/docs/concepts/git).
+<!-- markdownlint-disable -->
+  <table>
+        <tbody>
+          <tr>
+            <td align="center">
+              <img
+                src="https://github.com/yurijserrano/Github-Profile-Readme-Logos/blob/master/frameworks/react.svg"
+                width="100px;"
+                alt="React"
+              />
+              <br />
+              <b>React</b>
+            </td>
+            <td align="center">
+              <img
+                src="https://avatars.githubusercontent.com/u/64235328?s=200&v=4"
+                width="100px;"
+                alt="Remix"
+              />
+              <br />
+              <b>Remix</b>
+            </td>
+            <td align="center">
+              <div >
+                <img
+                  src="https://raw.githubusercontent.com/chakra-ui/chakra-ui/main/media/logo-colored@2x.png?raw=true"
+                  width="100px;"
+                  alt="Chakra UI"
+                />
+              </div>
+              <b>Chakra UI</b>
+            </td>
+            <td align="center">
+              <img
+                src="https://raw.githubusercontent.com/remojansen/logo.ts/master/ts.png"
+                width="100px;"
+                alt="Typescript"
+              />
+              <br />
+              <b>Typescript</b>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-## Development
-
-To run your Remix app locally, make sure your project's local dependencies are installed:
-
-```sh
-npm install
-```
-
-Afterwards, start the Remix development server like so:
-
-```sh
-npm run dev
-```
-
-Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!
-
-If you're used to using the `vercel dev` command provided by [Vercel CLI](https://vercel.com/cli) instead, you can also use that, but it's not needed.
+<!-- markdownlint-restore -->
