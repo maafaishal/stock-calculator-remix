@@ -25,6 +25,7 @@ export const meta: MetaFunction = () => ({
 
 export let links: LinksFunction = () => {
   return [
+    { rel: "icon", href: "/favicon.png", type: "image/x-icon" },
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
     { rel: "preconnect", href: "https://fonts.gstatic.com" },
     {
