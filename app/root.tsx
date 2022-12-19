@@ -9,7 +9,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import { withEmotionCache } from "@emotion/react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import Layout from "./components/Layout";
 
@@ -32,6 +32,12 @@ export let links: LinksFunction = () => {
     },
   ];
 };
+
+const theme = extendTheme({
+  config: {
+    useSystemColorMode: true,
+  },
+});
 
 interface DocumentProps {
   children: React.ReactNode;
@@ -84,7 +90,7 @@ const Document = withEmotionCache(
 export default function App() {
   return (
     <Document>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Layout>
           <Outlet />
         </Layout>
