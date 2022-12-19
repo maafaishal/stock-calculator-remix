@@ -18,6 +18,8 @@ interface Props {
 export default function Layout({ children }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
 
+  const isLight = colorMode === "light";
+
   return (
     <div>
       <Box
@@ -26,7 +28,7 @@ export default function Layout({ children }: Props) {
         h="112"
         p={4}
         borderBottom="1px"
-        borderBottomColor="blackAlpha.300"
+        borderBottomColor={isLight ? "blackAlpha.300" : "gray.600"}
         display="flex"
         alignItems="flex-end"
         justifyContent="center"
@@ -47,7 +49,7 @@ export default function Layout({ children }: Props) {
                 maxW="40px"
                 w="100%"
               />
-              <Heading as="h2" size="xl" marginLeft={4} color="idx">
+              <Heading as="h2" size="xl" marginLeft={4}>
                 Stock Tools
               </Heading>
             </Box>
@@ -68,7 +70,7 @@ export default function Layout({ children }: Props) {
               aria-label="Switch Color"
               onClick={toggleColorMode}
               icon={
-                colorMode === "light" ? (
+                isLight ? (
                   <MoonIcon fontSize="20px" />
                 ) : (
                   <SunIcon fontSize="20px" />
@@ -81,7 +83,14 @@ export default function Layout({ children }: Props) {
       <Box w="100%" minH="calc(100vh - (112px + 56px))" display="flex">
         {children}
       </Box>
-      <Box as="footer" w="100%" p={4} bg="#EFEFEF" color="black">
+      <Box
+        as="footer"
+        w="100%"
+        p={4}
+        bg={isLight ? "gray.100" : undefined}
+        borderTop="1px"
+        borderTopColor={isLight ? "gray.100" : "gray.600"}
+      >
         <Container
           maxW="container.lg"
           display="flex"

@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+
 import type { MetaFunction, LinksFunction } from "@remix-run/node";
 import {
   Links,
@@ -36,6 +37,11 @@ export let links: LinksFunction = () => {
 const theme = extendTheme({
   config: {
     useSystemColorMode: true,
+  },
+  semanticTokens: {
+    colors: {
+      "chakra-body-text": { _light: "gray.700" },
+    },
   },
 });
 
