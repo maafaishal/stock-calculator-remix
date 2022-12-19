@@ -1,7 +1,6 @@
 import {
   Box,
   Text,
-  Heading,
   Image,
   IconButton,
   Container,
@@ -25,8 +24,9 @@ export default function Layout({ children }: Props) {
       <Box
         as="header"
         w="100%"
-        h="132"
+        h="116"
         p={4}
+        paddingBottom="20px"
         borderBottom="1px"
         borderBottomColor={isLight ? "blackAlpha.300" : "gray.600"}
         display="flex"
@@ -46,12 +46,9 @@ export default function Layout({ children }: Props) {
               <Image
                 src="/imgs/idx-logo.png"
                 alt="idx logo"
-                maxW="40px"
+                maxW="256px"
                 w="100%"
               />
-              <Heading as="h2" size="xl" marginLeft={4}>
-                Tools
-              </Heading>
             </Box>
           </Link>
           <Box position="absolute" right={0}>
@@ -80,7 +77,7 @@ export default function Layout({ children }: Props) {
           </Box>
         </Container>
       </Box>
-      <Box w="100%" minH="calc(100vh - (132px + 88px))" display="flex">
+      <Box w="100%" minH="calc(100vh - (116px + 88px))" display="flex">
         {children}
       </Box>
       <Box
