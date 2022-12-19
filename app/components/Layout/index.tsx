@@ -1,4 +1,4 @@
-import { Box, Text, Heading, Link as LinkComp } from "@chakra-ui/react";
+import { Box, Text, Heading, Link as LinkComp, Image } from "@chakra-ui/react";
 import { Link } from "@remix-run/react";
 
 interface Props {
@@ -20,9 +20,17 @@ export default function Layout({ children }: Props) {
         justifyContent="center"
       >
         <Link to="/">
-          <Heading as="h2" size="2xl">
-            IDX Stock Tools
-          </Heading>
+          <Box display="flex" alignItems="center">
+            <Image
+              src="/imgs/idx-logo.png"
+              alt="idx logo"
+              maxW="40px"
+              w="100%"
+            />
+            <Heading as="h2" size="xl" marginLeft={4} color="idx">
+              Stock Tools
+            </Heading>
+          </Box>
         </Link>
       </Box>
       <Box w="100%" minH="calc(100vh - (112px + 56px))" display="flex">
