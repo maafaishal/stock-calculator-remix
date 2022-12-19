@@ -1,11 +1,23 @@
-import { Box, Text, Heading, Link as LinkComp, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Heading,
+  Link as LinkComp,
+  Image,
+  IconButton,
+  Container,
+  useColorMode,
+} from "@chakra-ui/react";
 import { Link } from "@remix-run/react";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export default function Layout({ children }: Props) {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <div>
       <Box
@@ -19,19 +31,35 @@ export default function Layout({ children }: Props) {
         alignItems="flex-end"
         justifyContent="center"
       >
-        <Link to="/">
-          <Box display="flex" alignItems="center">
-            <Image
-              src="/imgs/idx-logo.png"
-              alt="idx logo"
-              maxW="40px"
-              w="100%"
-            />
-            <Heading as="h2" size="xl" marginLeft={4} color="idx">
-              Stock Tools
-            </Heading>
-          </Box>
-        </Link>
+        <Container
+          maxW="container.lg"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          position="relative"
+          w="100%"
+        >
+          <Link to="/">
+            <Box display="flex" alignItems="center">
+              <Image
+                src="/imgs/idx-logo.png"
+                alt="idx logo"
+                maxW="40px"
+                w="100%"
+              />
+              <Heading as="h2" size="xl" marginLeft={4} color="idx">
+                Stock Tools
+              </Heading>
+            </Box>
+          </Link>
+          <IconButton
+            position="absolute"
+            right={0}
+            aria-label="Switch Color"
+            onClick={toggleColorMode}
+            icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+          />
+        </Container>
       </Box>
       <Box w="100%" minH="calc(100vh - (112px + 56px))" display="flex">
         {children}

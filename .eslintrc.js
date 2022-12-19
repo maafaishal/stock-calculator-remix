@@ -5,7 +5,7 @@ module.exports = {
   rules: {
     "react/jsx-curly-brace-presence": [
       "warn",
-      { props: "never", children: "never", propElementValues: "never" },
+      { props: "never", children: "never", propElementValues: "always" },
     ],
     "import/no-duplicates": ["warn"],
     "@typescript-eslint/no-unused-vars": "off",
