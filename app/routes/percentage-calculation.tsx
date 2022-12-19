@@ -15,6 +15,8 @@ import {
 import type { ActionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
+import { useEffect, useRef } from "react";
+import { useLocalStorage } from "usehooks-ts";
 
 import getMeta from "~/helpers/getMeta";
 import printNumberFormat from "~/helpers/printNumberFormat";
@@ -24,12 +26,26 @@ export const meta: MetaFunction = () =>
 
 export default function PercentageCalculation() {
   const actionData = useActionData<typeof action>();
+  const [lastData, setLastData] = useLocalStorage("PERCENTAGE_LAST_DATA", {
+    amount: 0,
+    averagePrice: 0,
+  });
 
   const {
     percentage = 0,
     amountTotal = 0,
     amountDeviation = 0,
+    amount = 0,
+    averagePrice = 0,
   } = actionData || {};
+  const prevPercentage = useRef(percentage);
+
+  useEffect(() => {
+    if (prevPercentage.current !== percentage) {
+      prevPercentage.current = percentage;
+      setLastData({ amount, averagePrice });
+    }
+  }, [amount, averagePrice, percentage, setLastData]);
 
   const textColor = percentage < 0 ? "red.500" : "green.400";
 
@@ -44,7 +60,7 @@ export default function PercentageCalculation() {
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
               <FormControl>
                 <FormLabel>Average Price</FormLabel>
-                <NumberInput>
+                <NumberInput defaultValue={lastData.averagePrice}>
                   <NumberInputField
                     placeholder="Put average price here"
                     name="averagePrice"
@@ -53,7 +69,7 @@ export default function PercentageCalculation() {
               </FormControl>
               <FormControl>
                 <FormLabel>Current/Target Price</FormLabel>
-                <NumberInput>
+                <NumberInput defaultValue={0}>
                   <NumberInputField
                     placeholder="Put current/target price here"
                     name="targetPrice"
@@ -62,7 +78,7 @@ export default function PercentageCalculation() {
               </FormControl>
               <FormControl>
                 <FormLabel>Amount</FormLabel>
-                <NumberInput min={50}>
+                <NumberInput defaultValue={lastData.amount}>
                   <NumberInputField
                     placeholder="Put amount here"
                     name="amount"
@@ -131,5 +147,7 @@ export const action = async ({ request }: ActionArgs) => {
     percentage: percentage,
     amountTotal: printNumberFormat(amountTotal, { withCurrency: true }),
     amountDeviation: printNumberFormat(amountDeviation, { withCurrency: true }),
+    amount,
+    averagePrice,
   });
 };
