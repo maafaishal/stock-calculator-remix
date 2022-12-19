@@ -18,6 +18,8 @@ import {
 import type { ActionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
+import { useLocalStorage } from "usehooks-ts";
+import { useRef, useEffect } from "react";
 
 import getMeta from "~/helpers/getMeta";
 import printNumberFormat from "~/helpers/printNumberFormat";
@@ -30,8 +32,26 @@ export const meta: MetaFunction = () =>
 
 export default function AverageCalculation() {
   const actionData = useActionData<typeof action>();
+  const [lastAvgData, setLastAvgData] = useLocalStorage("AVG_PRICE_LAST_DATA", {
+    currentLot: 0,
+    currentPrice: 0,
+  });
 
-  const { averagePrice = 0, stockLot = 0, amount = 0 } = actionData || {};
+  const {
+    averagePrice = 0,
+    stockLot = 0,
+    amount = 0,
+    currentLot = 0,
+    currentPrice = 0,
+  } = actionData || {};
+  const prevAveragePrice = useRef(averagePrice);
+
+  useEffect(() => {
+    if (prevAveragePrice.current !== averagePrice) {
+      prevAveragePrice.current = averagePrice;
+      setLastAvgData({ currentLot, currentPrice });
+    }
+  }, [averagePrice, currentLot, currentPrice, setLastAvgData]);
 
   return (
     <Container maxW="container.lg" pt={8} pb={16}>
@@ -65,7 +85,7 @@ export default function AverageCalculation() {
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
               <FormControl>
                 <FormLabel>Current Lot</FormLabel>
-                <NumberInput>
+                <NumberInput defaultValue={lastAvgData.currentLot}>
                   <NumberInputField
                     placeholder="Put stock lot here"
                     name="currentLot"
@@ -74,7 +94,7 @@ export default function AverageCalculation() {
               </FormControl>
               <FormControl>
                 <FormLabel>Current Price</FormLabel>
-                <NumberInput>
+                <NumberInput defaultValue={lastAvgData.currentPrice}>
                   <NumberInputField
                     placeholder="Put stock price here"
                     name="currentPrice"
@@ -83,7 +103,7 @@ export default function AverageCalculation() {
               </FormControl>
               <FormControl>
                 <FormLabel>Target Lot</FormLabel>
-                <NumberInput>
+                <NumberInput defaultValue={0}>
                   <NumberInputField
                     placeholder="Put stock lot here"
                     name="targetLot"
@@ -92,7 +112,7 @@ export default function AverageCalculation() {
               </FormControl>
               <FormControl>
                 <FormLabel>Target Price</FormLabel>
-                <NumberInput>
+                <NumberInput defaultValue={0}>
                   <NumberInputField
                     placeholder="Put stock price here"
                     name="targetPrice"
@@ -183,5 +203,7 @@ export const action = async ({ request }: ActionArgs) => {
     averagePrice,
     stockLot: printNumberFormat(lotTotal),
     amount: printNumberFormat(amountTotal * 100, { withCurrency: true }),
+    currentLot,
+    currentPrice,
   });
 };
