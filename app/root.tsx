@@ -15,11 +15,12 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Layout from "./components/Layout";
 
 import { ServerStyleContext, ClientStyleContext } from "./context";
-import { META_TITLE } from "./constants/meta";
+import { META_TITLE, META_DESC } from "./constants/meta";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: META_TITLE,
+  description: META_DESC,
   viewport: "width=device-width,initial-scale=1",
 });
 
