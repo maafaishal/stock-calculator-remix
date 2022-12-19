@@ -25,7 +25,6 @@ export default function Layout({ children }: Props) {
       <Box
         as="header"
         w="100%"
-        h="112"
         p={4}
         borderBottom="1px"
         borderBottomColor={isLight ? "blackAlpha.300" : "gray.600"}
@@ -36,7 +35,6 @@ export default function Layout({ children }: Props) {
         <Container
           maxW="container.lg"
           display="flex"
-          justifyContent="center"
           alignItems="center"
           position="relative"
           w="100%"
@@ -50,7 +48,7 @@ export default function Layout({ children }: Props) {
                 w="100%"
               />
               <Heading as="h2" size="xl" marginLeft={4}>
-                Stock Tools
+                Tools
               </Heading>
             </Box>
           </Link>
@@ -63,7 +61,7 @@ export default function Layout({ children }: Props) {
               <IconButton
                 aria-label="Go to Github"
                 icon={<ImGithub fontSize="20px" />}
-                marginRight="6px"
+                marginRight="8px"
               />
             </a>
             <IconButton
@@ -80,7 +78,7 @@ export default function Layout({ children }: Props) {
           </Box>
         </Container>
       </Box>
-      <Box w="100%" minH="calc(100vh - (112px + 88px))" display="flex">
+      <Box w="100%" minH="calc(100vh - (90.14px + 88px))" display="flex">
         {children}
       </Box>
       <Box
