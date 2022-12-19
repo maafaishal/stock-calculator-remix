@@ -25,6 +25,7 @@ export default function Layout({ children }: Props) {
       <Box
         as="header"
         w="100%"
+        h="132"
         p={4}
         borderBottom="1px"
         borderBottomColor={isLight ? "blackAlpha.300" : "gray.600"}
@@ -35,6 +36,7 @@ export default function Layout({ children }: Props) {
         <Container
           maxW="container.lg"
           display="flex"
+          justifyContent="center"
           alignItems="center"
           position="relative"
           w="100%"
@@ -78,7 +80,7 @@ export default function Layout({ children }: Props) {
           </Box>
         </Container>
       </Box>
-      <Box w="100%" minH="calc(100vh - (90.14px + 88px))" display="flex">
+      <Box w="100%" minH="calc(100vh - (132px + 88px))" display="flex">
         {children}
       </Box>
       <Box
