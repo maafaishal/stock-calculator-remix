@@ -10,49 +10,7 @@
 
 ## Tech Stack
 
-<!-- markdownlint-disable -->
-  <table>
-        <tbody>
-          <tr>
-            <td align="center">
-              <img
-                src="https://github.com/yurijserrano/Github-Profile-Readme-Logos/blob/master/frameworks/react.svg"
-                width="100px;"
-                alt="React"
-              />
-              <br />
-              <b>React</b>
-            </td>
-            <td align="center">
-              <img
-                src="https://avatars.githubusercontent.com/u/64235328?s=200&v=4"
-                width="100px;"
-                alt="Remix"
-              />
-              <br />
-              <b>Remix</b>
-            </td>
-            <td align="center">
-              <div >
-                <img
-                  src="https://raw.githubusercontent.com/chakra-ui/chakra-ui/main/media/logo-colored@2x.png?raw=true"
-                  width="100px;"
-                  alt="Chakra UI"
-                />
-              </div>
-              <b>Chakra UI</b>
-            </td>
-            <td align="center">
-              <img
-                src="https://raw.githubusercontent.com/remojansen/logo.ts/master/ts.png"
-                width="100px;"
-                alt="Typescript"
-              />
-              <br />
-              <b>Typescript</b>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-<!-- markdownlint-restore -->
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Remix](https://img.shields.io/badge/remix-%23000.svg?style=for-the-badge&logo=remix&logoColor=white)
+![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
