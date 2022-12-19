@@ -56,7 +56,7 @@ export default function Layout({ children }: Props) {
           </Link>
           <Box position="absolute" right={0}>
             <a
-              href="https://github.com/maafaishal/stock-calculator-remix"
+              href="https://github.com/maafaishal/stock-tools-remix"
               target="_blank"
               rel="noreferrer"
             >
