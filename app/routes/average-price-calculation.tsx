@@ -14,15 +14,17 @@ import {
   RadioGroup,
   Radio,
   Stack,
-} from "@chakra-ui/react";
+ useToast } from "@chakra-ui/react";
 import type { ActionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
-import { useLocalStorage } from "usehooks-ts";
+import { useLocalStorage, useCopyToClipboard } from "usehooks-ts";
+
 import { useRef, useEffect } from "react";
+import printNumberFormat from "~/helpers/printNumberFormat";
+
 
 import getMeta from "~/helpers/getMeta";
-import printNumberFormat from "~/helpers/printNumberFormat";
 
 const BUY_TYPE = "1";
 const SELL_TYPE = "2";
@@ -32,6 +34,10 @@ export const meta: MetaFunction = () =>
 
 export default function AverageCalculation() {
   const actionData = useActionData<typeof action>();
+  const [clipboardValue, copyToClipboard] = useCopyToClipboard()
+  const toast = useToast()
+
+
   const [lastAvgData, setLastAvgData] = useLocalStorage("AVG_PRICE_LAST_DATA", {
     currentLot: 0,
     currentPrice: 0,
@@ -46,12 +52,30 @@ export default function AverageCalculation() {
   } = actionData || {};
   const prevAveragePrice = useRef(averagePrice);
 
+  const averagePriceText = printNumberFormat(averagePrice, {
+    withCurrency: true,
+  });
+  const stockLotText = printNumberFormat(stockLot)
+  const amountText = printNumberFormat(amount * 100, { withCurrency: true })
+
   useEffect(() => {
     if (prevAveragePrice.current !== averagePrice) {
       prevAveragePrice.current = averagePrice;
       setLastAvgData({ currentLot, currentPrice });
     }
   }, [averagePrice, currentLot, currentPrice, setLastAvgData]);
+
+  useEffect(() => {
+    if(clipboardValue) {
+      toast({
+        title: 'Success!',
+        description: "Text has been copied to clipboard",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
+  }, [clipboardValue, toast])
 
   return (
     <Container maxW="container.lg" pt={8} pb={16}>
@@ -132,33 +156,33 @@ export default function AverageCalculation() {
         </Heading>
         <Box display="flex">
           <Grid templateColumns="repeat(3, 1fr)" gap={6} w="100%">
-            <Card>
+            <Card onClick={() => copyToClipboard(String(averagePrice))} cursor="pointer">
               <CardHeader>
                 <Heading size="md">Average Price</Heading>
               </CardHeader>
               <CardBody>
-                <Text fontSize="4xl" fontWeight="bold" color="green.500">
-                  {averagePrice}
+                <Text fontSize="4xl" fontWeight="bold" color="green.500" >
+                  {averagePriceText}
                 </Text>
               </CardBody>
             </Card>
-            <Card>
+            <Card onClick={() => copyToClipboard(String(stockLot))} cursor="pointer">
               <CardHeader>
                 <Heading size="md">Lot</Heading>
               </CardHeader>
               <CardBody>
-                <Text fontSize="4xl" fontWeight="bold" color="green.500">
-                  {stockLot}
+                <Text fontSize="4xl" fontWeight="bold" color="green.500" >
+                  {stockLotText}
                 </Text>
               </CardBody>
             </Card>
-            <Card>
+            <Card onClick={() => copyToClipboard(String(amount))} cursor="pointer">
               <CardHeader>
                 <Heading size="md">Amount</Heading>
               </CardHeader>
               <CardBody>
-                <Text fontSize="4xl" fontWeight="bold" color="green.500">
-                  {amount}
+                <Text fontSize="4xl" fontWeight="bold" color="green.500" >
+                  {amountText}
                 </Text>
               </CardBody>
             </Card>
@@ -195,14 +219,12 @@ export const action = async ({ request }: ActionArgs) => {
     ? currentAmount + targetAmount
     : currentAmount - targetAmount;
   const lotTotal = isBuy ? currentLot + targetLot : currentLot - targetLot;
-  const averagePrice = printNumberFormat(amountTotal / lotTotal, {
-    withCurrency: true,
-  });
+  const averagePrice = amountTotal / lotTotal;
 
   return json({
     averagePrice,
-    stockLot: printNumberFormat(lotTotal),
-    amount: printNumberFormat(amountTotal * 100, { withCurrency: true }),
+    stockLot: lotTotal,
+    amount: amountTotal * 100,
     currentLot,
     currentPrice,
   });
