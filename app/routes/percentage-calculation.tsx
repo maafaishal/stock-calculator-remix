@@ -11,12 +11,13 @@ import {
   CardHeader,
   CardBody,
   Text,
+  useToast
 } from "@chakra-ui/react";
 import type { ActionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { useEffect, useRef } from "react";
-import { useLocalStorage } from "usehooks-ts";
+import { useLocalStorage, useCopyToClipboard } from "usehooks-ts";
 
 import getMeta from "~/helpers/getMeta";
 import printNumberFormat from "~/helpers/printNumberFormat";
@@ -26,6 +27,9 @@ export const meta: MetaFunction = () =>
 
 export default function PercentageCalculation() {
   const actionData = useActionData<typeof action>();
+  const [clipboardValue, copyToClipboard] = useCopyToClipboard()
+  const toast = useToast()
+
   const [lastData, setLastData] = useLocalStorage("PERCENTAGE_LAST_DATA", {
     amount: 0,
     averagePrice: 0,
@@ -40,12 +44,27 @@ export default function PercentageCalculation() {
   } = actionData || {};
   const prevPercentage = useRef(percentage);
 
+  const amountTotalText = printNumberFormat(amountTotal, { withCurrency: true })
+    const amountDeviationText = printNumberFormat(amountDeviation, { withCurrency: true })
+
   useEffect(() => {
     if (prevPercentage.current !== percentage) {
       prevPercentage.current = percentage;
       setLastData({ amount, averagePrice });
     }
   }, [amount, averagePrice, percentage, setLastData]);
+
+  useEffect(() => {
+    if(clipboardValue) {
+      toast({
+        title: 'Success!',
+        description: "Text has been copied to clipboard",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
+  }, [clipboardValue, toast])
 
   const textColor = percentage < 0 ? "red.500" : "green.400";
 
@@ -98,23 +117,23 @@ export default function PercentageCalculation() {
         </Heading>
         <Box display="flex">
           <Grid templateColumns="repeat(2, 1fr)" gap={6} w="100%">
-            <Card>
+            <Card onClick={() => copyToClipboard(String(amountTotal))} cursor="pointer">
               <CardHeader>
                 <Heading size="md">Amount Total</Heading>
               </CardHeader>
               <CardBody>
                 <Text fontSize="4xl" fontWeight="bold" color={textColor}>
-                  {amountTotal}
+                  {amountTotalText}
                 </Text>
               </CardBody>
             </Card>
-            <Card>
+            <Card onClick={() => copyToClipboard(String(percentage))} cursor="pointer">
               <CardHeader>
                 <Heading size="md">Percentage</Heading>
               </CardHeader>
               <CardBody>
                 <Text fontSize="4xl" fontWeight="bold" color={textColor}>
-                  {printNumberFormat(percentage)}% ({amountDeviation})
+                  {printNumberFormat(percentage)}% ({amountDeviationText})
                 </Text>
               </CardBody>
             </Card>
@@ -145,8 +164,8 @@ export const action = async ({ request }: ActionArgs) => {
 
   return json({
     percentage: percentage,
-    amountTotal: printNumberFormat(amountTotal, { withCurrency: true }),
-    amountDeviation: printNumberFormat(amountDeviation, { withCurrency: true }),
+    amountTotal,
+    amountDeviation,
     amount,
     averagePrice,
   });
