@@ -56,7 +56,7 @@ export default function AverageCalculation() {
     withCurrency: true,
   });
   const stockLotText = printNumberFormat(stockLot)
-  const amountText = printNumberFormat(amount * 100, { withCurrency: true })
+  const amountText = printNumberFormat(amount, { withCurrency: true })
 
   useEffect(() => {
     if (prevAveragePrice.current !== averagePrice) {
